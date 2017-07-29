@@ -85,7 +85,7 @@ const mutation = new GraphQLObjectType({
 			},
 			resolve(parentValue, { id }) {
 				return axios.delete(`http://localhost:3000/users/${id}`)
-					.then(res => res.data)
+					.then(res => res.data);
 			}
 		},
 		editUser: {
@@ -96,9 +96,9 @@ const mutation = new GraphQLObjectType({
 				age: { type: GraphQLInt },
 				companyId: { type: GraphQLString }
 			},
-			resolve(parentValue, { id, firstName, age }) {
-				return axios.patch(`http://localhost:3000/users/${id}`, { firstName, age, companyId })
-					.then(res => res.data)
+			resolve(parentValue, args) {
+				return axios.patch(`http://localhost:3000/users/${args.id}`, args)
+					.then(res => res.data);
 			}
 		}
 	}
@@ -108,3 +108,5 @@ module.exports = new GraphQLSchema({
 	query: RootQuery,
 	mutation
 });
+
+// test for commit
